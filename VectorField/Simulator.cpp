@@ -46,7 +46,7 @@ void Simulator::Update(float dt) {
 }
 
 void Simulator::Render() {
-	renderer->DrawCoordinateGrid(this->coordinateGrid);
+	//renderer->DrawCoordinateGrid(this->coordinateGrid);
 	renderer->DrawVectorField(this->vectorField);
 	renderer->DrawSimulatorBall();
 	
