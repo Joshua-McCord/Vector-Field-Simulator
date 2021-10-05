@@ -5,6 +5,7 @@
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include <glm/gtx/matrix_decompose.hpp>
+#include <glm/gtx/rotate_vector.hpp>
 #include <array>
 #include <set>
 #include <algorithm>  // std::copy
@@ -45,7 +46,7 @@ private:
     // Render Data Initialization
     void initRenderData(glm::vec2 coordinateGrid[20][20], Vector vectorField[400], glm::vec3 ballInitialState);
     void initCoordinateGridRenderer(glm::vec2 coordinateGrid[20][20]);
-    void initVectorFieldRenderer(Vector vectorField[]);
+    void initVectorRenderer(Vector vectorField[]);
     void initSimulatorBallRenderer(glm::vec3 ballInitialState);
 
     // Shader Management
