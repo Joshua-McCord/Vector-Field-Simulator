@@ -156,8 +156,8 @@
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Ball.frag" />
-    <None Include="Ball.vert" />
+    <None Include="Particle.frag" />
+    <None Include="Particle.vert" />
     <None Include="CoordinateGrid.frag" />
     <None Include="CoordinateGrid.vert" />
     <None Include="Vector.frag" />

@@ -11,7 +11,7 @@ Vector::Vector() {
 Vector::Vector(glm::vec3 origin, glm::vec3 direction, float magnitude) {
 	this->origin = origin;
 	this->direction = direction;//glm::vec3(dir.x * dir.x - dir.y * dir.y,  2 * dir.x * dir.y,  dir.z);
-	this->magnitute = glm::distance(origin, glm::vec3(0.0f)) / 7.5f;
+	this->magnitute = glm::distance(origin, glm::vec3(0.0f)) / 5.0f;
 
 }
 

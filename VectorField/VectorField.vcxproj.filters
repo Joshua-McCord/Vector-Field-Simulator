@@ -53,7 +53,7 @@
     <None Include="CoordinateGrid.frag" />
     <None Include="Vector.vert" />
     <None Include="Vector.frag" />
-    <None Include="Ball.vert" />
-    <None Include="Ball.frag" />
+    <None Include="Particle.vert" />
+    <None Include="Particle.frag" />
   </ItemGroup>
 </Project>

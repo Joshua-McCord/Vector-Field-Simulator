@@ -7,6 +7,8 @@ void framebuffer_resize_callback(GLFWwindow* window, int width, int height);
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
+static void mouse_callback(GLFWwindow* window, int button, int action, int mods);
+
 Simulator Sim(1000, 1000);
 
 int main()
@@ -33,6 +35,7 @@ int main()
 
     glfwSetKeyCallback(window, key_callback);
     glfwSetFramebufferSizeCallback(window, framebuffer_resize_callback);
+    glfwSetMouseButtonCallback(window, mouse_callback);
 
     float deltaTime = 0.0f;
     float lastFrame = 0.0f;
@@ -44,16 +47,20 @@ int main()
 
 
         // check and call events and swap the buffers
-        // rgb(243, 239, 204)
-        //0, 48, 73
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.02f, 0.02f, 0.02f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         float currentFrame = glfwGetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
+        // Process Input
+        Sim.ProcessInput(deltaTime);
+
+        // Update Simulation
         Sim.Update(deltaTime);
 
+
+        // Render Simulation
         Sim.Render();
 
         glfwSwapBuffers(window);
@@ -68,16 +75,27 @@ void framebuffer_resize_callback(GLFWwindow* window, int width, int height) {
     glViewport(0, 0, width, height);
 }
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
     // when a user presses the escape key, we set the WindowShouldClose property to true, closing the application
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
     if (key >= 0 && key < 1024)
     {
-       /* if (action == GLFW_PRESS)
-            program.Keys[key] = true;
+        if (action == GLFW_PRESS)
+            Sim.Keys[key] = true;
         else if (action == GLFW_RELEASE)
-            program.Keys[key] = false;*/
+            Sim.Keys[key] = false;
+    }
+}
+
+
+static void mouse_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+        double x;
+        double y;
+        glfwGetCursorPos(window, &x, &y);
+
+        Sim.ProcessMouseInput(x, y);
     }
 }

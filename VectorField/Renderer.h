@@ -18,19 +18,24 @@
 class Renderer
 {
 public:
-    glm::mat4 ballTransformMatrix = glm::mat4(1.0f);
+    // Common Variables
+    glm::mat4 particleTransformMatrix = glm::mat4(1.0f);
+    double particleX = 0;
+    double particleY = 0;
 
-    Renderer(glm::vec2 coordinateGrid[20][20], Vector vectorField[400], glm::vec3 ballInitialState);
+    // Constructor/Destructor
+    Renderer(glm::vec2 coordinateGrid[20][20], Vector vectorField[400], glm::vec3 particleInitialState);
     ~Renderer();
-
 
     // Draw the elements every frame
     void DrawVectorField(Vector vectorField[400]);
+    void UpdateVectorField(Vector vectorField[400]);
     void DrawCoordinateGrid(glm::vec2 coordinateGrid[20][20]);
-    void DrawSimulatorBall();
+    void DrawParticle();
 
-    // Update Ball Position
-    glm::mat4 UpdateBallTranslation(glm::vec3 newPos);
+    // Update Particle Position
+    void UpdateParticleTranslationMatrix(glm::vec3 newPos);
+    void MoveParticle(double x, double y);
 
 private:
 
@@ -41,13 +46,13 @@ private:
     // VAOS
     unsigned int coordinateGridVAO;
     unsigned int vectorFieldVAO;
-    unsigned int simulatorBallVAO;
+    unsigned int particleVAO;
 
     // Render Data Initialization
-    void initRenderData(glm::vec2 coordinateGrid[20][20], Vector vectorField[400], glm::vec3 ballInitialState);
+    void initRenderData(glm::vec2 coordinateGrid[20][20], Vector vectorField[400], glm::vec3 particleInitialState);
     void initCoordinateGridRenderer(glm::vec2 coordinateGrid[20][20]);
-    void initVectorFieldRenderer(Vector vectorField[]);
-    void initSimulatorBallRenderer(glm::vec3 ballInitialState);
+    void initVectorFieldRenderer(Vector vectorField[400]);
+    void initParticleRenderer(glm::vec3 particleInitialState);
 
     // Shader Management
     Shader shader;
