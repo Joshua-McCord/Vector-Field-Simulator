@@ -24,10 +24,9 @@ void Renderer::initRenderData(glm::vec2 coordinateGrid[20][20], Vector vectorFie
     this->LoadShader("Ball.vert", "Ball.frag", nullptr, "ballShader");
 
     this->initCoordinateGridRenderer(coordinateGrid);
-    this->initVectorRenderer(vectorField);
+    this->initVectorFieldRenderer(vectorField);
     this->initSimulatorBallRenderer(ballInitialState);
 }
-
 void Renderer::initCoordinateGridRenderer(glm::vec2 coordinateGrid[20][20]) {
     float vertices[240];
     int cnt = 0;
@@ -66,37 +65,35 @@ void Renderer::initCoordinateGridRenderer(glm::vec2 coordinateGrid[20][20]) {
 }
 void Renderer::initVectorRenderer(Vector vectorField[]) {
     float vertices[] = {
-        0.00f,  -0.05f, 0.0f,  // bottom left
-         0.00f,  0.05f, 0.0f,  // top left
-       0.75f,  -0.05f, 0.0f,  // bottom right
-         0.750f,  0.05f, 0.0f,  // top right
-        0.5f,  -0.15f, 0.0f,  // right bottom point
-        0.5f,   0.15f, 0.0f,   // left top point 
-        1.0f,    0.0f, 0.0     //tip
+        0.015f,  0.5f, 0.0f,  // top right
+        0.015f,  0.0f, 0.0f,  // bottom right
+       -0.015f,  0.0f, 0.0f,  // bottom left
+       -0.015f,  0.5f, 0.0f,   // top left 
+        0.06f,  0.3f, 0.0f,  // right point
+       -0.06f,  0.3f, 0.0f,   // left point 
+        0.0f,    0.7f, 0.0     //tip
     };
     unsigned int indices[] = {
         0, 1, 3,
-        0, 2, 3,
+        1, 2, 3,
         4, 5, 6
     };
     unsigned int VBO, EBO;
     glGenVertexArrays(1, &this->vectorFieldVAO);
     glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
+    // bind vectorFieldVAO
     glBindVertexArray(this->vectorFieldVAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 2400, vertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
     glBindVertexArray(0);
+
+    // since on heap, need to delete 
+    delete[] vertices;
 }
 void Renderer::initSimulatorBallRenderer(glm::vec3 ballInitialState) {
     this->ballTransformMatrix = glm::translate(this->ballTransformMatrix, glm::vec3(5.0f, 5.0f, 0.0f));
@@ -139,14 +136,8 @@ void Renderer::DrawVectorField(Vector vectorField[400]) {
     for (int i = 0; i < 400; i++) {
         Vector vec = vectorField[i];
         model = glm::mat4(1.0f);
+        model = glm::rotate(model, glm::dot(vec.origin, vec.direction), vectorField[i].origin);
         model = glm::translate(model, vectorField[i].origin);
-        glm::vec3 dir = vec.direction - vec.origin;
-        
-        float angle;
-        angle = (atan2(-(double)dir.y, -(double)dir.x) * (double)180 / (double)3.14159);
-
-        model = glm::rotate(model, angle, vec.origin);
-        
         this->shader = shaderManager["vectorShader"];
         this->shader.Use();
         this->shader.SetMatrix4("projection", this->proj);
@@ -158,7 +149,7 @@ void Renderer::DrawVectorField(Vector vectorField[400]) {
         glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
     }
-
+    
 }
 void Renderer::DrawCoordinateGrid(glm::vec2 coordinateGrid[20][20]) {
     // prepare transformations
