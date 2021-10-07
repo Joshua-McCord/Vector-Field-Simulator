@@ -6,5 +6,6 @@ in vec4 finalPos;
 
 void main()
 {
-    FragColor = vec4(0.8f, 0.3f, 0.196f, 1.0f);
+    //202, 223, 158
+    FragColor = vec4(202/250.0f, 223/250.0f, 158/250.0f, 1.0f);
 } 

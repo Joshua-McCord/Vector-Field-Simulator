@@ -62,4 +62,5 @@ private:
     static Shader loadShaderFromFile(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile = nullptr);
     Shader LoadShader(const char* vShaderFile, const char* fShaderFile, const char* gShaderFile, std::string name);
 
+    glm::vec3 SetFillFromHUE(float hue);
 };

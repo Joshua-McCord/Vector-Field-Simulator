@@ -47,7 +47,7 @@ int main()
 
 
         // check and call events and swap the buffers
-        glClearColor(0.02f, 0.02f, 0.02f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         float currentFrame = glfwGetTime();

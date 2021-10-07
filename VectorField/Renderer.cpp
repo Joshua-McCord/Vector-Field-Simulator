@@ -89,7 +89,7 @@ void Renderer::initVectorFieldRenderer(Vector vectorField[400]) {
 }
 void Renderer::UpdateVectorField(Vector vectorField[400]) {
     // want to put vertices on heap since its so large
-    size_t vertCnt = 2400;
+    size_t vertCnt = 4800;
     float* vertices = new float[vertCnt];
     int cnt = 0;
 
@@ -102,12 +102,25 @@ void Renderer::UpdateVectorField(Vector vectorField[400]) {
         vertices[cnt++] = pos.y;
         vertices[cnt++] = pos.z;
 
+        float v = mag;//sqrt(pow(dir.x, 2) + pow(dir.y, 2)) / 10.0;
+        glm::vec3 color = this->SetFillFromHUE(v * 2.0f / 4.0f);
+
+
+        vertices[cnt++] = color.x;
+        vertices[cnt++] = color.y;
+        vertices[cnt++] = color.z;
+
 
         glm::vec3 end = (pos + mag * dir);
 
         vertices[cnt++] = end.x;
         vertices[cnt++] = end.y;
         vertices[cnt++] = end.z;
+
+
+        vertices[cnt++] = color.x;
+        vertices[cnt++] = color.y;
+        vertices[cnt++] = color.z;
     }
 
     unsigned int VBO;
@@ -118,8 +131,11 @@ void Renderer::UpdateVectorField(Vector vectorField[400]) {
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertCnt, vertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
@@ -265,4 +281,12 @@ Shader Renderer::LoadShader(const char* vShaderFile, const char* fShaderFile, co
 {
     shaderManager[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
     return shaderManager[name];
+}
+
+glm::vec3 Renderer::SetFillFromHUE(float hue) {
+
+    float R = abs(hue * 6.0 - 3.0) - 1.0;
+    float G = 2.0 - abs(hue * 6.0 - 2.0);
+    float B = 2.0 - abs(hue * 6.0 - 4.0);
+    return glm::vec3(R, G, B);
 }
