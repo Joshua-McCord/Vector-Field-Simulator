@@ -16,9 +16,9 @@ Renderer::~Renderer() {
 // Load and Store Shaders and Initialize all Renderers
 // ---------------------------------------------------
 void Renderer::initRenderData(glm::vec2 coordinateGrid[20][20], Vector vectorField[400], glm::vec3 ballInitialState) {
-    this->LoadShader("CoordinateGrid.vert", "CoordinateGrid.frag", nullptr, "coordinateGridShader");
-    this->LoadShader("Vector.vert", "Vector.frag", nullptr, "vectorShader");
-    this->LoadShader("Particle.vert", "Particle.frag", nullptr, "particleShader");
+    this->LoadShader("C:/Users/jmccord34/source/repos/VectorField/VectorField/Shaders/Vertex/CoordinateGrid.vert", "C:/Users/jmccord34/source/repos/VectorField/VectorField/Shaders/Fragment/CoordinateGrid.frag", nullptr, "coordinateGridShader");
+    this->LoadShader("C:/Users/jmccord34/source/repos/VectorField/VectorField/Shaders/Vertex/Vector.vert", "C:/Users/jmccord34/source/repos/VectorField/VectorField/Shaders/Fragment/Vector.frag", nullptr, "vectorShader");
+    this->LoadShader("C:/Users/jmccord34/source/repos/VectorField/VectorField/Shaders/Vertex/Particle.vert", "C:/Users/jmccord34/source/repos/VectorField/VectorField/Shaders/Fragment/Particle.frag", nullptr, "particleShader");
 
     this->initCoordinateGridRenderer(coordinateGrid);
     this->initVectorFieldRenderer(vectorField);

@@ -1,7 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include "Simulator.h"
+#include "Simulator/Simulator.h"
 
 void framebuffer_resize_callback(GLFWwindow* window, int width, int height);
 

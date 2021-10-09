@@ -13,8 +13,8 @@
 #include <map>
 #include <string>
 
-#include "Shader.h"
-#include "Vector.h"
+#include "../Shaders/Shader.h"
+#include "../Simulator/Vector.h"
 class Renderer
 {
 public:

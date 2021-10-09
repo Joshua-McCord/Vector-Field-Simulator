@@ -21,39 +21,39 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Simulator.cpp">
+    <ClCompile Include="Simulator\Simulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
+    <ClCompile Include="Renderer\Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="Shaders\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vector.cpp">
+    <ClCompile Include="Simulator\Vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Simulator.h">
+    <ClInclude Include="Simulator\Simulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
+    <ClInclude Include="Renderer\Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
+    <ClInclude Include="Shaders\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.h">
+    <ClInclude Include="Simulator\Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="CoordinateGrid.vert" />
-    <None Include="CoordinateGrid.frag" />
-    <None Include="Vector.vert" />
-    <None Include="Vector.frag" />
-    <None Include="Particle.vert" />
-    <None Include="Particle.frag" />
+    <None Include="Shaders\Vertex\CoordinateGrid.vert" />
+    <None Include="Shaders\Fragment\CoordinateGrid.frag" />
+    <None Include="Shaders\Vertex\Vector.vert" />
+    <None Include="Shaders\Fragment\Vector.frag" />
+    <None Include="Shaders\Vertex\Particle.vert" />
+    <None Include="Shaders\Fragment\Particle.frag" />
   </ItemGroup>
 </Project>

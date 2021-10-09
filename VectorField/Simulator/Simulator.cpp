@@ -41,15 +41,16 @@ void Simulator::init() {
 }
 
 void Simulator::Update(float dt) {
+	float step_size = 0.01f;
 	switch (CurrentSolverState) {
 		case EULER_SOLVER:
-			renderer->UpdateParticleTranslationMatrix(this->Euler_step(0.01f));
+			renderer->UpdateParticleTranslationMatrix(this->Euler_step(step_size));
 			break;
 		case MIDPOINT_SOLVER:
-			renderer->UpdateParticleTranslationMatrix(this->Midpoint_Step(0.01f));
+			renderer->UpdateParticleTranslationMatrix(this->Midpoint_Step(step_size));
 			break;
 		case RUNGE_KUTTA_FOUR_SOLVER:
-			renderer->UpdateParticleTranslationMatrix(this->Runge_Kutta_Four_Step(0.01f));
+			renderer->UpdateParticleTranslationMatrix(this->Runge_Kutta_Four_Step(step_size));
 			break;
 	}
 }
