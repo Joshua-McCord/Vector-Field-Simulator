@@ -1,6 +1,6 @@
 # Vector Field Simulator
 Vector Field Simulator written in C++ and OpenGL. <br> 
-The simulator contains 10 different vector field function, three different solvers, and supports velocity based coloring of the vectors. 
+The simulator contains 10 different vector field functions, three different solvers, and supports velocity based coloring of the vectors. 
 ## Available Functions, Mappings, and Controls
 (some visibility issues may arise with dark theme) <br> <br>
 <img src="https://latex.codecogs.com/svg.latex?\Large&space;[1]=f(x,y,z)=<x^2+y^2,2xy,z>"/> <br>
